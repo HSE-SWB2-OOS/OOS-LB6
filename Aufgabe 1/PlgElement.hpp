@@ -25,6 +25,9 @@ public:
 	PlgElement();
 	~PlgElement();
 
+	// Instanzmehtoden
+	void setNext(PlgElement *);
+
 	Point point;
 	PlgElement *next;
 

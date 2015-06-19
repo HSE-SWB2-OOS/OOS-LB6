@@ -11,14 +11,19 @@ bool debugConstructor = false;
 
 int main() {
 	// Punkt erstellen und Infos ausgeben
-	const Point p;
+	Point p;  // Const weggeschummelt ;-)
 	cout << "maxId = " << ObjectCounter::getMaxId() << endl;
 	cout << "ID von p = " << p.getId() << endl;
 	// ID von p unerlaubt ändern
 	*(((int*)(&p))+1) = ObjectCounter::getMaxId() + 10;
 	// Punkt ausgeben
-	cout << "ID von p = " << p.getId() << endl;
-	p.print();
+	try {
+		cout << "ID von p = " << p.getId() << endl;
+		p.print();
+	}
+	catch (DrawingObject::IdTooHigh){
+		// Meldung ausgeben
+	}
 	// Polygonline erstellen und ausgeben
 	Polygonline pl;
 	pl.addPoint(Point(1, 1));
@@ -31,6 +36,15 @@ int main() {
 	PlgElement * last = (PlgElement *)(*((int*)(&pl) + 3));
 	last->setNext(first);
 	// Polygonline ausgeben
-	pl.print();
-	return 0;
+	try {
+		pl.print();
+		return 0;
+	}
+	catch (Polygonline::LoopInLine){
+		// Meldung ausgeben.
+	}
+
+	catch (DrawingObject::GraphException& e){
+		// Meldung ausgeben
+	}
 }

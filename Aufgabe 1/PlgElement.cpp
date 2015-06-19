@@ -26,3 +26,8 @@ PlgElement::PlgElement()
 PlgElement::~PlgElement()
 {
 }
+
+// Instanzmethoden
+void PlgElement::setNext(PlgElement *element){
+	this->next = element;
+}

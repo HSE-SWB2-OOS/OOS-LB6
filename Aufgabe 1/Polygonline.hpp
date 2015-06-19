@@ -45,7 +45,6 @@ public:
 	PlgElement & getList() const;
 	string toString() const;										// Wandelt die Infos des Objektes in einen String um
 
-
 	// Operatoren
 	friend ostream & operator<< (ostream & o, Polygonline const & line);
 	Polygonline & operator+ (Point p);
