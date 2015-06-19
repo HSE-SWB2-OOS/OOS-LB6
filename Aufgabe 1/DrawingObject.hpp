@@ -25,6 +25,23 @@ public:
 	DrawingObject();
 	~DrawingObject();
 
-	// Klassenmethoden
+	// Instaznmethoden
 	virtual void print(bool)const;
+	void check(int)const;
+
+	// Interne Klassen
+	class GraphException {
+		
+		// Variablen
+		const int id;
+
+		// Konstruktoren
+		GraphException(const int);
+	};
+
+	class IdTooHigh : public GraphException{
+	public:
+		// Instanzmethoden
+		int getId();
+	};
 };

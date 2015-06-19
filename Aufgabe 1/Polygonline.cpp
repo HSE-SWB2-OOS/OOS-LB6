@@ -177,13 +177,18 @@ string Polygonline::toString() const
 
 	if (this->elementCounter > 0)
 	{
+		int printCount = 0;
 		do
 		{
 			tempstream << "(" << temp->point.getX() << "," << temp->point.getY() << ")";
 			temp = temp->next;
+			
 
 			if (this->elementCounter > 1 && temp != nullptr)
 				tempstream << "-";
+
+			if (printCount > elementCounter) throw LoopInLine();
+			printCount++;
 
 		} while (temp != nullptr);
 	}

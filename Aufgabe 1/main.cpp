@@ -1,65 +1,36 @@
-#pragma once
+// main.cpp zur Demonstration der vorhersehbaren Fehler
+
 #include <iostream>
-#include <string>
-#include "DrawingObject.hpp"
-#include "Ponit.hpp"
-#include "Circle.hpp"
 #include "Polygonline.hpp"
-#include "Rectangle.hpp"
 using namespace std;
 
+bool debugConstructor = false;
+
+// unsigned int ObjectCounter::maxId = 0;
+// unsigned int ObjectCounter::number = 0;
 
 int main() {
-	DrawingObject * objects[20];
-	int anzahl = 0;
-	cout << "Wieviele Objekte wollen Sie einlesen?" << endl; cout << "Anzahl: ";
-	cin >> anzahl;
-	string *strArray = new string[anzahl];
-
-	// Anleitung ausgeben
-	cout << "Bitte geben Sie Ihre Objekte ein:" << endl;
-	cout << "Bitte beachten Sie folgende Schreibweisen: " << endl;
-	cout << "Punkt        (x.y,x.y)" << endl;
-	cout << "Kreis       <(x.y,x.y),x.y>" << endl;
-	cout << "Linie       |(x.y,x.y),(x.y,x.y) , ...." << endl;
-	cout << "Rechteck    [(x.y,x.y),(x.y,x.y)]" << endl;
-
-	// Objekte einlesen
-	for (int i = 0; i<anzahl; i++){
-	// einzelnes Objekt einlesen
-		cout << "Bitte geben Sie Ihr " << i + 1 << ". Objekt ein: ";
-		fflush(stdin);
-		getline(cin, strArray[i]);
-	}
-
-	// Objekte Identifizieren und anlegen
-
-	for (int i = 0; i < anzahl; i++){
-		string temp = strArray[i].substr(0, 1);
-		
-		if (temp == "("){
-			objects[i] = new Point(strArray[i]);
-		}
-		else
-			if (temp == "<"){
-				objects[i] = new Circle(strArray[i]);
-			}
-			else
-				if (temp == "|"){
-					objects[i] = new Polygonline(strArray[i]);
-				}
-				else
-					if (temp == "["){
-						objects[i] = new Rectangle(strArray[i]);
-					}
-
-	}
-
-	// Objekte ausgeben
-	for (int i = 0; i<anzahl; i++) {
-		objects[i]->print(true);
-	}
-	fflush(stdin);
-	cin.get();
+	// Punkt erstellen und Infos ausgeben
+	const Point p;
+	cout << "maxId = " << ObjectCounter::getMaxId() << endl;
+	cout << "ID von p = " << p.getId() << endl;
+	// ID von p unerlaubt ändern
+	*(((int*)(&p))+1) = ObjectCounter::getMaxId() + 10;
+	// Punkt ausgeben
+	cout << "ID von p = " << p.getId() << endl;
+	p.print();
+	// Polygonline erstellen und ausgeben
+	Polygonline pl;
+	pl.addPoint(Point(1, 1));
+	pl.addPoint(Point(2, 2));
+	pl.addPoint(Point(3, 3));
+	pl.addPoint(Point(4, 4));
+	pl.print();
+	// Polygonline unerlaubt ändern
+	PlgElement * first = (PlgElement *)(*((int*)(&pl) + 2));
+	PlgElement * last = (PlgElement *)(*((int*)(&pl) + 3));
+	last->setNext(first);
+	// Polygonline ausgeben
+	pl.print();
 	return 0;
 }

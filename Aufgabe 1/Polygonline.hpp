@@ -51,6 +51,11 @@ public:
 	Polygonline & operator+ (Point p);
 	Polygonline & operator+ (Polygonline const & l);
 
+	// Interne Klassen
+	class LoopInLine : public GraphException{
+
+	};
+
 private:
 	PlgElement *endNode;
 	PlgElement *head;

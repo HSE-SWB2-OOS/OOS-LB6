@@ -31,8 +31,21 @@ DrawingObject::~DrawingObject(){
 
 void DrawingObject::print(bool = false)const{
 
-}
+};
 
-;
+// Aufruf über this->check(this->gehtId());
+void DrawingObject::check(int oId)const{
+
+	if (oId > ObjectCounter::getMaxId()){
+		// Ausnahme typ IdTooHigh werfen
+		throw IdTooHigh();
+	}
+};
+
+DrawingObject::GraphException::GraphException(const int oId) : id(oId){
+};
+
+int DrawingObject::IdTooHigh::getId(){ return this->getId(); };
+
 
 
