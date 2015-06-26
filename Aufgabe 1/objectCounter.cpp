@@ -21,7 +21,7 @@ Die Klasse objectCounter zählt Elemente, vergibt eindeutige IDs und verwaltet d
 #include <iostream>
 
 // Get Methioden
-unsigned int ObjectCounter::getId() {return this->id;}
+unsigned int ObjectCounter::getId()const {return this->id;}
 unsigned int ObjectCounter::getMaxId(){return maxId;}
 unsigned int ObjectCounter::getNumber() {return number;}
 
@@ -35,11 +35,11 @@ ObjectCounter::ObjectCounter(){
 	this->id = getMaxId() +1;
 	maxId++;
 	number++;
-	std::cout << std::endl << "Konstruktor der Klasse objectCounter, ObjectID: " << getId() << std::endl;
+	// std::cout << std::endl << "Konstruktor der Klasse objectCounter, ObjectID: " << getId() << std::endl;
 }
 
 // Destruktor
 ObjectCounter::~ObjectCounter(){
-	std::cout << std::endl << "Destruktor der Klasse objectCounter, ObjectID: " << getId() << std::endl;
+	// std::cout << std::endl << "Destruktor der Klasse objectCounter, ObjectID: " << getId() << std::endl;
 	number--;
 }

@@ -34,7 +34,7 @@ Point::Point(const Point &p){
 	this->setX(p.getX());
 	this->setY(p.getY());
 	
-	std::cout << std::endl << "Kopierkonstruktor der Klasse Point, Objekt ID: " << getId() << endl;
+	// std::cout << std::endl << "Kopierkonstruktor der Klasse Point, Objekt ID: " << getId() << endl;
 
 }
 
@@ -94,10 +94,11 @@ void Point::move(double dx, double dy)
 // Methode um die Koordinaten des Punktes auszugeben.
 void Point::print(bool newLine) const
 {
-	if (newLine== true)
-		cout << "(" << this->x << ", " << this->y << ")"<< endl;
-	else
-		cout << "(" << this->x << ", " << this->y << ")";
+		this->check(this->getId());
+		if (newLine == true)
+			cout << "(" << this->x << ", " << this->y << ")" << endl;
+		else
+			cout << "(" << this->x << ", " << this->y << ")";
 }
 
 // Methode um das Opjekt Point in einen String umzubauen.

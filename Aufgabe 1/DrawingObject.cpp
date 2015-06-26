@@ -22,11 +22,11 @@ Programmbeschreibung:
 
 // Konstruktor, Destruktor
 DrawingObject::DrawingObject() : ObjectCounter(){
-	std::cout << std::endl << "Konstruktor der Klasse DrawingObject, ObjectID: " << getId() << std::endl;
+	// std::cout << std::endl << "Konstruktor der Klasse DrawingObject, ObjectID: " << getId() << std::endl;
 
 }
 DrawingObject::~DrawingObject(){
-	std::cout << std::endl << "Destruktor der Klasse DrawingObject, ObjectID: " << getId() << std::endl;
+	// std::cout << std::endl << "Destruktor der Klasse DrawingObject, ObjectID: " << getId() << std::endl;
 }
 
 void DrawingObject::print(bool = false)const{
@@ -38,14 +38,24 @@ void DrawingObject::check(int oId)const{
 
 	if (oId > ObjectCounter::getMaxId()){
 		// Ausnahme typ IdTooHigh werfen
-		throw IdTooHigh();
+		throw IdTooHigh(oId);
 	}
 };
 
-DrawingObject::GraphException::GraphException(const int oId) : id(oId){
+// Konstruktor GraphException
+DrawingObject::GraphException::GraphException(const int oId) : id(oId){};
+
+// Konstruktor IdTooHighException
+DrawingObject::IdTooHigh::IdTooHigh(int oId): GraphException(oId){};
+
+// Mthoden der IdTooHighException
+int DrawingObject::IdTooHigh::getId(){ return this->getId(); };
+void DrawingObject::IdTooHigh::printException(){
+	std::cout << "Die ID " << this->getEId() << " ist zu hoch! (MaxId ist " << DrawingObject::getMaxId() << ")" << std::endl;
 };
 
-int DrawingObject::IdTooHigh::getId(){ return this->getId(); };
+// Methoden der GraphException Methoden
+int DrawingObject::GraphException::getEId(){ return this->id; };
 
 
 

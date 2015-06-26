@@ -31,17 +31,24 @@ public:
 
 	// Interne Klassen
 	class GraphException {
-		
+	public:	
 		// Variablen
 		const int id;
 
 		// Konstruktoren
 		GraphException(const int);
+
+		//Set und Get
+		int getEId();
 	};
 
 	class IdTooHigh : public GraphException{
 	public:
+		// Konstruktoren
+		IdTooHigh(int);
+
 		// Instanzmethoden
 		int getId();
+		void printException();
 	};
 };

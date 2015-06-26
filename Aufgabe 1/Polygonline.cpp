@@ -187,12 +187,17 @@ string Polygonline::toString() const
 			if (this->elementCounter > 1 && temp != nullptr)
 				tempstream << "-";
 
-			if (printCount > elementCounter) throw LoopInLine();
+			if (printCount > elementCounter){
+				throw LoopInLine(this->getId());
+			}
+
 			printCount++;
 
 		} while (temp != nullptr);
+		if (elementCounter > printCount) throw LoopInLine(this->getId());
 	}
 	tempstream << "|";
+
 	return tempstream.str();
 
 }
@@ -214,4 +219,13 @@ Polygonline & Polygonline::operator+ (Point p)
 Polygonline & Polygonline::operator+ (Polygonline const & l)
 {
 	return this->appendPolygonline(l);
+}
+
+// Methoden der Klasse LoopInLine
+Polygonline::LoopInLine::LoopInLine(int eId) : GraphException(eId){
+	this->eId = this->id;
+}
+
+void Polygonline::LoopInLine::printException(){
+	cout << "Problem bei der Augabe von Polygonlinie Objekt ID.: " << eId << ", die Liste ist defekt" << endl;
 }

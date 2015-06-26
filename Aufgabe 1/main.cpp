@@ -21,8 +21,9 @@ int main() {
 		cout << "ID von p = " << p.getId() << endl;
 		p.print();
 	}
-	catch (DrawingObject::IdTooHigh){
-		// Meldung ausgeben
+	catch (DrawingObject::IdTooHigh &e){
+		e.printException();
+
 	}
 	// Polygonline erstellen und ausgeben
 	Polygonline pl;
@@ -38,13 +39,15 @@ int main() {
 	// Polygonline ausgeben
 	try {
 		pl.print();
-		return 0;
 	}
-	catch (Polygonline::LoopInLine){
-		// Meldung ausgeben.
+	catch (Polygonline::LoopInLine &e){
+		e.printException();
 	}
 
 	catch (DrawingObject::GraphException& e){
 		// Meldung ausgeben
 	}
+
+	cin.get();
+	return 0;
 }

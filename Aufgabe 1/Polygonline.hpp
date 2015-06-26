@@ -52,7 +52,10 @@ public:
 
 	// Interne Klassen
 	class LoopInLine : public GraphException{
-
+		int eId;
+	public:
+		LoopInLine(int);
+		void printException();
 	};
 
 private:
